@@ -38,7 +38,7 @@ public class CheckPlanController {
      */
     @ApiOperation(value="添加新CheckPlan", notes="注册一个CheckPlan")
     @RequestMapping(value = "/checkplans", method = RequestMethod.POST)
-    public Result saveUser(@RequestBody @Valid CheckPlanRequestVO requestDTO){
+    public Result saveCheckPlan(@RequestBody @Valid CheckPlanRequestVO requestDTO){
         Long userId = checkPlanService.saveCheckPlan(requestDTO);
 
         return ResultGenerator.genSuccessResult(userId);
