@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.CheckPlanMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.CheckPlan">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="start_date" jdbcType="TIMESTAMP" property="startdate" />
+    <result column="end_date" jdbcType="TIMESTAMP" property="enddate" />
+    <result column="device_id" jdbcType="BIGINT" property="deviceid" />
+    <result column="device_name" jdbcType="VARCHAR" property="devicename" />
+    <result column="check_type" jdbcType="VARCHAR" property="checktype" />
+    <result column="owner_name" jdbcType="VARCHAR" property="ownername"/>
+    <result column="project" jdbcType="VARCHAR" property="project"/>
+    <result column="check_cycle" jdbcType="VARCHAR" property="checkcycle"/>
+    <result column="check_state" jdbcType="VARCHAR" property="checkstate"/>
+    <result column="company" jdbcType="VARCHAR" property="company"/>
+
+  </resultMap>
+
+  <insert id="saveCheckPlan" parameterType="com.company.project.model.CheckPlan" keyProperty="id" useGeneratedKeys="true">
+    <selectKey keyProperty="id" resultType="java.lang.Long">
+      select LAST_INSERT_ID()
+    </selectKey>
+    INSERT INTO CHECK_PLAN(start_date,end_date,device_id,device_name,check_type,owner_name,project,check_cycle,check_state,company)
+    VALUES(#{startdate},#{enddate},#{deviceid},#{devicename},#{checktype},#{ownername},#{project},#{checkcycle},#{checkstate},#{company})
+  </insert>
+
+  <select id="findByCompany" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT id,start_date,end_date,device_id,device_name,check_type,owner_name,project,check_cycle,check_state,company FROM CHECK_PLAN WHERE company=#{company}
+  </select>
+
+
+  <select id="findById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    SELECT id,start_date,end_date,device_id,device_name,check_type,owner_name,project,check_cycle,check_state,company FROM CHECK_PLAN WHERE id=#{id}
+  </select>
+
+  <select id="findAll" resultMap="BaseResultMap">
+    SELECT id,start_date,end_date,device_id,device_name,check_type,owner_name,project,check_cycle,check_state,company FROM CHECK_PLAN
+  </select>
+  
+  <delete id="deleteById" parameterType="java.lang.Long">
+    DELETE FROM CHECK_PLAN WHERE id=#{id}
+  </delete>
+  
+  <update id="updateCheckType">
+    UPDATE CHECK_PLAN SET check_type=#{checktype} WHERE id=#{id}
+  </update>
+
+  <update id="updateProject">
+    UPDATE CHECK_PLAN SET project=#{project} WHERE id=#{id}
+  </update>
+
+  <update id="updateCheckCycle">
+    UPDATE CHECK_PLAN SET check_cycle=#{checkcycle} WHERE id=#{id}
+  </update>
+  
+  <update id="updateCheckState">
+    UPDATE CHECK_PLAN SET check_state=#{checkstate} WHERE id=#{id}
+  </update>
+  
+
+  <update id="updateCheckPlan" parameterType="com.company.project.model.CheckPlan">
+    UPDATE CHECK_PLAN SET check_cycle=#{checkcycle},check_state=#{checkstate} WHERE id=#{id}
+  </update>
+</mapper>
