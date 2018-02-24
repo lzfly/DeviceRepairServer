@@ -38,16 +38,18 @@ CREATE TABLE `check_plan` (
   `end_date` date DEFAULT NULL,
   `device_id` bigint(20) DEFAULT NULL,
   `device_name` varchar(64) DEFAULT NULL,
-  `type` varchar(64) DEFAULT NULL,
-  `ower_id` bigint(20) DEFAULT NULL,
-  `project_id` bigint(20) DEFAULT NULL,
-  `cycle_time_id` bigint(20) DEFAULT NULL,
-  `state_id` bigint(20) DEFAULT NULL,
-  `company_id` bigint(20) DEFAULT NULL,
+  `check_type` varchar(64) DEFAULT NULL,
+  `owner_name` varchar(64) DEFAULT NULL,
+  `project` varchar(128) DEFAULT NULL,
+  `check_cycle` varchar(128) DEFAULT NULL,
+  `check_state` varchar(64) DEFAULT NULL,
+  `company` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 /*Data for the table `check_plan` */
+
+insert  into `check_plan`(`id`,`start_date`,`end_date`,`device_id`,`device_name`,`check_type`,`owner_name`,`project`,`check_cycle`,`check_state`,`company`) values (2,'2018-01-02','2018-02-03',1,'dev1','1','lu','pr1','3','ok','lapsen');
 
 /*Table structure for table `check_state` */
 
@@ -93,17 +95,18 @@ CREATE TABLE `device` (
   `id` tinyint(4) NOT NULL AUTO_INCREMENT,
   `sn` varchar(64) DEFAULT NULL,
   `name` varchar(64) DEFAULT NULL,
-  `region_big` varchar(256) DEFAULT NULL,
-  `region_small` varchar(256) DEFAULT NULL,
+  `region` varchar(256) DEFAULT NULL,
   `type` varchar(64) DEFAULT NULL,
   `factory` varchar(128) DEFAULT NULL,
   `date` date DEFAULT NULL,
-  `ower` varchar(64) DEFAULT NULL,
-  `company_id` bigint(20) DEFAULT NULL,
+  `owner_name` varchar(64) DEFAULT NULL,
+  `company` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 /*Data for the table `device` */
+
+insert  into `device`(`id`,`sn`,`name`,`region`,`type`,`factory`,`date`,`owner_name`,`company`) values (2,'3435435435435','dev1','beijing','robot','lapsen','2018-02-09','lu','lapsen'),(3,'3435435435435','dev1','beijing','robot','lapsen','2018-02-09','lu','lapsen'),(4,'3435435435435','dev1','beijing','robot','lapsen','2018-02-09','lu','lapsen');
 
 /*Table structure for table `project` */
 
@@ -111,7 +114,7 @@ DROP TABLE IF EXISTS `project`;
 
 CREATE TABLE `project` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(256) DEFAULT NULL,
+  `name` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -128,16 +131,20 @@ CREATE TABLE `repair_item` (
   `discription` varchar(256) DEFAULT NULL,
   `audio_path` varchar(256) DEFAULT NULL,
   `picture_path` varchar(256) DEFAULT NULL,
-  `check_ower` bigint(20) DEFAULT NULL,
-  `check_time` time DEFAULT NULL,
-  `repair_state` bigint(20) DEFAULT NULL,
-  `repair_ower` bigint(20) DEFAULT NULL,
-  `repair_time` time DEFAULT NULL,
-  `company_id` bigint(20) DEFAULT NULL,
+  `check_owner` varchar(64) DEFAULT NULL,
+  `check_time` datetime DEFAULT NULL,
+  `accept_owner` varchar(64) DEFAULT NULL,
+  `accept_time` datetime DEFAULT NULL,
+  `repair_state` varchar(64) DEFAULT NULL,
+  `repair_owner` varchar(64) DEFAULT NULL,
+  `repair_time` datetime DEFAULT NULL,
+  `company` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 /*Data for the table `repair_item` */
+
+insert  into `repair_item`(`id`,`device_id`,`device_name`,`discription`,`audio_path`,`picture_path`,`check_owner`,`check_time`,`accept_owner`,`accept_time`,`repair_state`,`repair_owner`,`repair_time`,`company`) values (2,1,'dev1','错了','/audio.mp3','/picture.png','lu','2018-02-24 01:30:45','lu','2018-02-24 05:30:46','fail','luoiefly','2018-02-24 06:20:35','lapsen'),(3,1,'dev1','错了','/audio.mp3','/picture.png','lu','2018-02-09 01:30:45','lu','2018-02-09 05:30:46','ok','luoie','2018-02-09 06:20:35','lapsen');
 
 /*Table structure for table `repair_state` */
 
