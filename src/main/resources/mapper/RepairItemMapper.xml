@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.RepairItemMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.RepairItem">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="device_id" jdbcType="BIGINT" property="deviceid" />
+    <result column="device_name" jdbcType="VARCHAR" property="devicename" />
+    <result column="discription" jdbcType="VARCHAR" property="discription" />
+    <result column="audio_path" jdbcType="VARCHAR" property="audiopath" />
+    <result column="picture_path" jdbcType="VARCHAR" property="picturepath" />
+    <result column="check_owner" jdbcType="VARCHAR" property="checkowner"/>
+    <result column="check_time" jdbcType="TIMESTAMP" property="checktime"/>
+    <result column="accept_owner" jdbcType="VARCHAR" property="acceptowner"/>
+    <result column="accept_time" jdbcType="TIMESTAMP" property="accepttime"/>
+    <result column="repair_state" jdbcType="VARCHAR" property="repairstate"/>
+    <result column="repair_owner" jdbcType="VARCHAR" property="repairowner"/>
+    <result column="repair_time" jdbcType="TIMESTAMP" property="repairtime"/>
+    <result column="company" jdbcType="VARCHAR" property="company"/>
+
+  </resultMap>
+
+  <insert id="saveRepairItem" parameterType="com.company.project.model.RepairItem" keyProperty="id" useGeneratedKeys="true">
+    <selectKey keyProperty="id" resultType="java.lang.Long">
+      select LAST_INSERT_ID()
+    </selectKey>
+    INSERT INTO REPAIR_ITEM(device_id,device_name,discription,audio_path,picture_path,check_owner,check_time,accept_owner,accept_time,repair_state,repair_owner,repair_time,company)
+    VALUES(#{deviceid},#{devicename},#{discription},#{audiopath},#{picturepath},#{checkowner},#{checktime},#{acceptowner},#{accepttime},#{repairstate},#{repairowner},#{repairtime},#{company})
+  </insert>
+
+  <select id="findByCompany" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT id,device_id,device_name,discription,audio_path,picture_path,check_owner,check_time,accept_owner,accept_time,repair_state,repair_owner,repair_time,company FROM REPAIR_ITEM WHERE company=#{company}
+  </select>
+
+
+  <select id="findById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    SELECT id,device_id,device_name,discription,audio_path,picture_path,check_owner,check_time,accept_owner,accept_time,repair_state,repair_owner,repair_time,company FROM REPAIR_ITEM WHERE id=#{id}
+  </select>
+
+  <select id="findAll" resultMap="BaseResultMap">
+    SELECT id,device_id,device_name,discription,audio_path,picture_path,check_owner,check_time,accept_owner,accept_time,repair_state,repair_owner,repair_time,company FROM REPAIR_ITEM
+  </select>
+  
+  <delete id="deleteById" parameterType="java.lang.Long">
+    DELETE FROM REPAIR_ITEM WHERE id=#{id}
+  </delete>
+  
+
+  <update id="updateRepairItem" parameterType="com.company.project.model.RepairItem">
+    UPDATE REPAIR_ITEM SET accept_owner=#{acceptowner},accept_time=#{accepttime},repair_state=#{repairstate},repair_owner=#{repairowner},repair_time=#{repairtime} WHERE id=#{id}
+  </update>
+</mapper>
