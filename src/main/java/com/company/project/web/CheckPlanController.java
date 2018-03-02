@@ -70,15 +70,28 @@ public class CheckPlanController {
 
 
     @ApiOperation(value="获取CheckPlan列表", notes="分页查询CheckPlan列表")
-    @RequestMapping(value = "/checkplans", method = RequestMethod.GET)
+    @RequestMapping(value = "/allcheckplans", method = RequestMethod.GET)
     @ApiImplicitParams(value = {
                                     @ApiImplicitParam(paramType = "query", name = "pageNo", value = "页码"),
                                    @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页大小")
     })
     @RolesAllowed({"ROLE_AUTHOR"})
-    public Result listCheckPlan(@RequestParam(defaultValue = "0", required = false) Integer pageNo,
+    public Result listAllCheckPlan(@RequestParam(defaultValue = "0", required = false) Integer pageNo,
                            @RequestParam(defaultValue = "0", required = false) Integer pagesize) {
         return ResultGenerator.genSuccessResult(checkPlanService.findAll(pageNo, pagesize));
+    }
+    
+    @ApiOperation(value="获取CheckPlan列表", notes="分页查询CheckPlan列表")
+    @RequestMapping(value = "/checkplans", method = RequestMethod.GET)
+    @ApiImplicitParams(value = {
+    		                       @ApiImplicitParam(paramType = "header", name = "token", value = "token", required = true),
+                                   @ApiImplicitParam(paramType = "query", name = "pageNo", value = "页码"),
+                                   @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页大小")
+    })
+    public Result listCheckPlan(@RequestHeader("Authorization") String token,
+    		               @RequestParam(defaultValue = "0", required = false) Integer pageNo,
+                           @RequestParam(defaultValue = "0", required = false) Integer pagesize) {
+        return ResultGenerator.genSuccessResult(checkPlanService.findAllByCompany(token, pageNo, pagesize));
     }
 
 }

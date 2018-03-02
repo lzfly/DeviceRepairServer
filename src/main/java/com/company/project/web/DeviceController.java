@@ -70,15 +70,29 @@ public class DeviceController {
 
 
     @ApiOperation(value="获取Device列表", notes="分页查询Device列表")
-    @RequestMapping(value = "/devices", method = RequestMethod.GET)
+    @RequestMapping(value = "/alldevices", method = RequestMethod.GET)
     @ApiImplicitParams(value = {
                                     @ApiImplicitParam(paramType = "query", name = "pageNo", value = "页码"),
                                    @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页大小")
     })
     @RolesAllowed({"ROLE_AUTHOR"})
-    public Result listDevice(@RequestParam(defaultValue = "0", required = false) Integer pageNo,
+    public Result listAllDevice(@RequestParam(defaultValue = "0", required = false) Integer pageNo,
                            @RequestParam(defaultValue = "0", required = false) Integer pagesize) {
         return ResultGenerator.genSuccessResult(deviceService.findAll(pageNo, pagesize));
+    }
+    
+    @ApiOperation(value="获取公司Device列表", notes="分页查询公司Device列表")
+    @RequestMapping(value = "/devices", method = RequestMethod.GET)
+    @ApiImplicitParams(value = {
+    		                       @ApiImplicitParam(paramType = "header", name = "token", value = "token", required = true),
+                                   @ApiImplicitParam(paramType = "query", name = "pageNo", value = "页码"),
+                                   @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页大小")
+    })
+    public Result listDevice(@RequestHeader("Authorization") String token,
+    		               @RequestParam(defaultValue = "0", required = false) Integer pageNo,
+                           @RequestParam(defaultValue = "0", required = false) Integer pagesize) {
+    	
+        return ResultGenerator.genSuccessResult(deviceService.findAllByCompany(token, pageNo, pagesize));
     }
 
 }

@@ -53,9 +53,11 @@ public interface DeviceService {
     /**
      * 根据手机号查询出用户
      * @param company
+     * @param pageNo
+     * @param pageSize
      * @return
      */
-    Device findByCompany(String company);
+    PageInfo<Device> findAllByCompany(String company, Integer pageNo, Integer pageSize);
 
 
 

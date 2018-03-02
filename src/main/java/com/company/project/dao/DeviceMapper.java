@@ -43,11 +43,11 @@ public interface DeviceMapper {
     List<Device> findAll();
 
     /**
-     * Find Device by company
+     * Find Devices by company
      * @param company
      * @return
      */
-    Device findByCompany(String company);
+    List<Device> findByCompany(String company);
 
 
 

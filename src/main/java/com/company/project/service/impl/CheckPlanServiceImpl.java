@@ -4,6 +4,9 @@ import com.company.project.core.ServiceException;
 import com.company.project.dao.CheckPlanMapper;
 import com.company.project.vo.CheckPlanRequestVO;
 import com.company.project.model.CheckPlan;
+import com.company.project.security.GeneratorUserDetailService;
+import com.company.project.security.JwtTokenUtil;
+import com.company.project.security.SecurityUser;
 import com.company.project.service.CheckPlanService;
 import com.company.project.utils.CglibBeanCopierUtils;
 import com.github.pagehelper.PageHelper;
@@ -46,6 +49,11 @@ public class CheckPlanServiceImpl implements CheckPlanService {
     @Autowired
     private CheckPlanMapper checkPlanMapper;
 
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
+
+    @Autowired
+    private GeneratorUserDetailService userDetailService;
 
 
     @Value("${jwt.tokenHead}")
@@ -97,8 +105,20 @@ public class CheckPlanServiceImpl implements CheckPlanService {
     }
 
     @Override
-    public CheckPlan findByCompany(String company) {
-        return checkPlanMapper.findByCompany(company);
+    public PageInfo<CheckPlan> findAllByCompany(String token, Integer pageNo, Integer pageSize) {
+        PageHelper.startPage(pageNo, pageSize);
+        
+        final String tokenok = token.substring(tokenHead.length(),token.length());
+        LOGGER.info("token is {}", tokenok);
+        String username = jwtTokenUtil.getUsernameFromToken(tokenok);
+        
+        LOGGER.info("username is {}", username);
+        
+        SecurityUser user = (SecurityUser) userDetailService.loadUserByUsername(username);
+        
+        PageInfo<CheckPlan> pageInfo = new PageInfo<>(checkPlanMapper.findByCompany(user.getCompany()));
+
+        return pageInfo;
     }
 
 

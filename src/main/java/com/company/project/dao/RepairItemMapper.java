@@ -47,7 +47,7 @@ public interface RepairItemMapper {
      * @param company
      * @return
      */
-    RepairItem findByCompany(String company);
+    List<RepairItem> findByCompany(String company);
 
 
 

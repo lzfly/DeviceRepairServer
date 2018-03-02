@@ -28,6 +28,8 @@ public class UserRegisterVO {
     @Length(min = 11, message = "请输入合法的手机号")
     private String phone;
     
+    private String company;
+    
     /**
      * @return name
      */
@@ -54,6 +56,20 @@ public class UserRegisterVO {
      */
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+    
+    /**
+     * @return company
+     */
+    public String getCompany() {
+        return phone;
+    }
+
+    /**
+     * @param company
+     */
+    public void setCompany(String company) {
+        this.company = company;
     }
     
     /**

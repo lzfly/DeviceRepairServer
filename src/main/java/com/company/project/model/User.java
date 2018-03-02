@@ -56,6 +56,11 @@ public class User {
     private String phone;
     
     /**
+     * company 用户注册的公司
+     */
+    private String company;
+    
+    /**
      * @return id
      */
     public Long getId() {
@@ -123,6 +128,20 @@ public class User {
      */
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+    
+    /**
+     * @return company
+     */
+    public String getCompany() {
+        return company;
+    }
+
+    /**
+     * @param phone
+     */
+    public void setCompany(String company) {
+        this.company = company;
     }
     
     /**

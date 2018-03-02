@@ -32,6 +32,8 @@ public class UserRequestVO {
      */
     private String phone;
     
+    private String company;
+    
     /**
      * @return name
      */
@@ -58,6 +60,20 @@ public class UserRequestVO {
      */
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+    
+    /**
+     * @return company
+     */
+    public String getCompany() {
+        return phone;
+    }
+
+    /**
+     * @param company
+     */
+    public void setCompany(String company) {
+        this.company = company;
     }
     
     /**

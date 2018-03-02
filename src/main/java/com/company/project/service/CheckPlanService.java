@@ -55,7 +55,7 @@ public interface CheckPlanService {
      * @param company
      * @return
      */
-    CheckPlan findByCompany(String company);
+    PageInfo<CheckPlan> findAllByCompany(String company, Integer pageNo, Integer pageSize);
 
 
 

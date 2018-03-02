@@ -70,15 +70,28 @@ public class RepairItemController {
 
 
     @ApiOperation(value="获取RepairItem列表", notes="分页查询RepairItem列表")
-    @RequestMapping(value = "/repairitems", method = RequestMethod.GET)
+    @RequestMapping(value = "/allrepairitems", method = RequestMethod.GET)
     @ApiImplicitParams(value = {
                                     @ApiImplicitParam(paramType = "query", name = "pageNo", value = "页码"),
                                    @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页大小")
     })
     @RolesAllowed({"ROLE_AUTHOR"})
-    public Result listRepairItem(@RequestParam(defaultValue = "0", required = false) Integer pageNo,
+    public Result listAllRepairItem(@RequestParam(defaultValue = "0", required = false) Integer pageNo,
                            @RequestParam(defaultValue = "0", required = false) Integer pagesize) {
         return ResultGenerator.genSuccessResult(repairItemService.findAll(pageNo, pagesize));
+    }
+    
+    @ApiOperation(value="获取RepairItem列表", notes="分页查询RepairItem列表")
+    @RequestMapping(value = "/repairitems", method = RequestMethod.GET)
+    @ApiImplicitParams(value = {
+    		                       @ApiImplicitParam(paramType = "header", name = "token", value = "token", required = true),
+                                   @ApiImplicitParam(paramType = "query", name = "pageNo", value = "页码"),
+                                   @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页大小")
+    })
+    public Result listRepairItem(@RequestHeader("Authorization") String token,
+    		               @RequestParam(defaultValue = "0", required = false) Integer pageNo,
+                           @RequestParam(defaultValue = "0", required = false) Integer pagesize) {
+        return ResultGenerator.genSuccessResult(repairItemService.findAllByCompany(token, pageNo, pagesize));
     }
 
 }

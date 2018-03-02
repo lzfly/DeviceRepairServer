@@ -47,7 +47,7 @@ public interface CheckPlanMapper {
      * @param company
      * @return
      */
-    CheckPlan findByCompany(String company);
+    List<CheckPlan> findByCompany(String company);
 
 
 

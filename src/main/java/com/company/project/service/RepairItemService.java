@@ -55,7 +55,7 @@ public interface RepairItemService {
      * @param company
      * @return
      */
-    RepairItem findByCompany(String company);
+    PageInfo<RepairItem> findAllByCompany(String company, Integer pageNo, Integer pageSize);
 
 
 

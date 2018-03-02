@@ -4,6 +4,9 @@ import com.company.project.core.ServiceException;
 import com.company.project.dao.DeviceMapper;
 import com.company.project.vo.DeviceRequestVO;
 import com.company.project.model.Device;
+import com.company.project.security.GeneratorUserDetailService;
+import com.company.project.security.JwtTokenUtil;
+import com.company.project.security.SecurityUser;
 import com.company.project.service.DeviceService;
 import com.company.project.utils.CglibBeanCopierUtils;
 import com.github.pagehelper.PageHelper;
@@ -46,6 +49,11 @@ public class DeviceServiceImpl implements DeviceService {
     @Autowired
     private DeviceMapper deviceMapper;
 
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
+
+    @Autowired
+    private GeneratorUserDetailService userDetailService;
 
 
     @Value("${jwt.tokenHead}")
@@ -97,8 +105,20 @@ public class DeviceServiceImpl implements DeviceService {
     }
 
     @Override
-    public Device findByCompany(String company) {
-        return deviceMapper.findByCompany(company);
+    public PageInfo<Device> findAllByCompany(String token, Integer pageNo, Integer pageSize) {
+        PageHelper.startPage(pageNo, pageSize);
+        
+        final String tokenok = token.substring(tokenHead.length(),token.length());
+        LOGGER.info("token is {}", tokenok);
+        String username = jwtTokenUtil.getUsernameFromToken(tokenok);
+        
+        LOGGER.info("username is {}", username);
+        
+        SecurityUser user = (SecurityUser) userDetailService.loadUserByUsername(username);
+        
+        PageInfo<Device> pageInfo = new PageInfo<>(deviceMapper.findByCompany(user.getCompany()));
+
+        return pageInfo;
     }
 
 

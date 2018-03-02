@@ -4,6 +4,9 @@ import com.company.project.core.ServiceException;
 import com.company.project.dao.RepairItemMapper;
 import com.company.project.vo.RepairItemRequestVO;
 import com.company.project.model.RepairItem;
+import com.company.project.security.GeneratorUserDetailService;
+import com.company.project.security.JwtTokenUtil;
+import com.company.project.security.SecurityUser;
 import com.company.project.service.RepairItemService;
 import com.company.project.utils.CglibBeanCopierUtils;
 import com.github.pagehelper.PageHelper;
@@ -46,6 +49,11 @@ public class RepairItemServiceImpl implements RepairItemService {
     @Autowired
     private RepairItemMapper repairItemMapper;
 
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
+
+    @Autowired
+    private GeneratorUserDetailService userDetailService;
 
 
     @Value("${jwt.tokenHead}")
@@ -97,8 +105,20 @@ public class RepairItemServiceImpl implements RepairItemService {
     }
 
     @Override
-    public RepairItem findByCompany(String company) {
-        return repairItemMapper.findByCompany(company);
+    public PageInfo<RepairItem> findAllByCompany(String token, Integer pageNo, Integer pageSize) {
+        PageHelper.startPage(pageNo, pageSize);
+        
+        final String tokenok = token.substring(tokenHead.length(),token.length());
+        LOGGER.info("token is {}", tokenok);
+        String username = jwtTokenUtil.getUsernameFromToken(tokenok);
+        
+        LOGGER.info("username is {}", username);
+        
+        SecurityUser user = (SecurityUser) userDetailService.loadUserByUsername(username);
+        
+        PageInfo<RepairItem> pageInfo = new PageInfo<>(repairItemMapper.findByCompany(user.getCompany()));
+
+        return pageInfo;
     }
 
 
