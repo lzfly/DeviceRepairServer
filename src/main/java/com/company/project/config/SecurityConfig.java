@@ -26,7 +26,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 /**
  * 整个Security的配置中心
- * Created by jinhuaquan on 2017/7/11.
  */
 @Configuration
 /**

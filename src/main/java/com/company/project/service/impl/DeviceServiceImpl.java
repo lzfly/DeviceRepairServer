@@ -37,7 +37,6 @@ import static com.google.common.base.Preconditions.checkArgument;
 /**
  * Created by CodeGenerator on 2017/10/15.
  *
- * @author jinhuaquan
  *
  * User的service层具体实现
  */

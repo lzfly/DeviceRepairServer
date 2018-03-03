@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
 /**
- * @author jinhuaquan
  */
 @Aspect
 @Component

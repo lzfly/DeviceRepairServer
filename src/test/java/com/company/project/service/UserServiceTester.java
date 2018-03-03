@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 
 /**
- * @author jinhuaquan
- * @create 2017-10-16 上午7:46
  * @desc UserService的测试类
  **/
 public class UserServiceTester extends Tester{

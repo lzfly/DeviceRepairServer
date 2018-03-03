@@ -11,8 +11,6 @@ import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 /**
- * @author jinhuaquan
- * @create 2018-01-11 下午10:02
  * @desc The request DTO of user
  **/
 @Data

@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by jinhuaquan on 2017/7/31.
  */
 @Component
 public class JwtTokenUtil {

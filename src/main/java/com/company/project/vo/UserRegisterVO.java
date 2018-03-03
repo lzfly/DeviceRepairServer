@@ -7,7 +7,6 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
- * Created by jinhuaquan on 2017/8/2.
  */
 @Data
 @ApiModel(value = "用户注册请求类", description = "用户注册")

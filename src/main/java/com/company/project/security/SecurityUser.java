@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * @author jinhuaquan
- * @create 2017-10-16 下午5:18
  * @desc springSecurity的安全user实体类
  **/
 public class SecurityUser extends User implements UserDetails {

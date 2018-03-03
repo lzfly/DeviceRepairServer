@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author jinhuaquan
- * @create 2018-01-13 上午9:48
  * @desc The utils of bean copy
  **/
 public class CglibBeanCopierUtils {

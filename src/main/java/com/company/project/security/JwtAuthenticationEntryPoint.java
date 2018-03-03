@@ -15,8 +15,6 @@ import java.io.Serializable;
 
 /**
  * 处理未通过Security认证的请求
- * @author jinhuaquan
- * @date 2017/7/31
  */
 @Component
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint,Serializable{

@@ -15,8 +15,6 @@ import java.util.Collection;
 import javax.annotation.Resource;
 
 /**
- * @author jinhuaquan
- * @create 2017-10-16 下午1:50
  * @desc spring security中的UserDetailService实现类
  **/
 //@AllArgsConstructor

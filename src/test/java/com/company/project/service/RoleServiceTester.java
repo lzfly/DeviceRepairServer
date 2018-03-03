@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 
 /**
- * @author jinhuaquan
- * @create 2017-10-16 下午3:31
  * @desc RoleService测试类
  **/
 public class RoleServiceTester extends Tester {

@@ -2,7 +2,6 @@ package com.company.project.core;
 
 /**
  * 响应码枚举，参考HTTP状态码的语义
- * @author jinhuaquan
  */
 public enum ResultCode {
     /**

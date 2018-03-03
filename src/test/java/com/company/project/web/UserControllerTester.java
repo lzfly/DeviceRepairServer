@@ -16,8 +16,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * @author jinhuaquan
- * @create 2017-10-16 上午9:38
  * @desc UserController的测试类
  **/
 public class UserControllerTester extends ControllerTester{

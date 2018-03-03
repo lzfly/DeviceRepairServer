@@ -5,8 +5,6 @@ import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
- * @author jinhuaquan
- * @create 2018-01-11 下午9:52
  * @desc The request DTO of role
  **/
 @Data

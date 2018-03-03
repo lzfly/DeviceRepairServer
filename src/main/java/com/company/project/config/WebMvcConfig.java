@@ -31,7 +31,6 @@ import java.nio.charset.Charset;
 import java.util.List;
 
 /**
- * @author jinhuaquan
  *
  * Spring MVC 配置
  *
